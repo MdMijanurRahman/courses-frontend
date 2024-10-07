@@ -1,25 +1,21 @@
-import { getAuth, getRedirectResult, GoogleAuthProvider } from "firebase/auth";
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAuth } from "firebase/auth"
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
 
-const auth = getAuth();
-getRedirectResult(auth)
-  .then((result) => {
-    // This gives you a Google Access Token. You can use it to access Google APIs.
-    const credential = GoogleAuthProvider.credentialFromResult(result);
-    const token = credential.accessToken;
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyB11BSg4y5mo01yo-bxzBEGL59hj0AFRS8",
+  authDomain: "courses-frontend.firebaseapp.com",
+  projectId: "courses-frontend",
+  storageBucket: "courses-frontend.appspot.com",
+  messagingSenderId: "132102556745",
+  appId: "1:132102556745:web:ec2db1e68f327275634398"
+};
 
-    // The signed-in user info.
-    const user = result.user;
-    // IdP data available using getAdditionalUserInfo(result)
-    // ...
-  }).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-    // The email of the user's account used.
-    const email = error.customData.email;
-    // The AuthCredential type that was used.
-    const credential = GoogleAuthProvider.credentialFromError(error);
-    // ...
-  });
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
-  export { auth };
+// Initialize Firebase Authentication and get a reference to the service
+export const auth = getAuth(app);
